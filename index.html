@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine Effect Questionnaire</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Poiret+One&family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.77/build/spline-viewer.js"></script>
+</head>
+<body>
+    <!-- Background Music -->
+     <!-- 🎵 Background Music (Free Piano Loop) -->
+    <audio id="background-music" autoplay loop>
+        <source src="https://www.youtube.com/embed/vNCDAvLxy_Y?autoplay=1&loop=1&playlist=vNCDAvLxy_Y" type="audio/mp4">
+        Your browser does not support the audio element.
+    </audio>
+    <!-- YouTube iframe for more robust autoplay attempt, will be unmuted by JS on user interaction -->
+    <div id="youtube-audio-player" style="display:none;">
+        <iframe width="0" height="0" src="https://www.youtube.com/embed/vNCDAvLxy_Y?autoplay=1&loop=1&playlist=vNCDAvLxy_Y&controls=0&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
+
+    <!-- Splash Slide -->
+    <div id="splash-slide" class="slide active">
+        <div class="confetti-container"></div>
+        <h1>Happy Birthday Vivian</h1>
+        <button id="start-button">Start</button>
+    </div>
+
+    
+    <!-- Cake Slide -->
+    <div id="cake-slide" class="slide">
+        <!-- Judul "Make a Wish!" di atas kue -->
+        <h2 class="cake-title">Make a Wish!</h2> 
+        
+        <div class="spline-container">
+            <spline-viewer url="https://prod.spline.design/29yIo2cSVvtZGcPJ/scene.splinecode"></spline-viewer>
+            <div class="candles-wrapper">
+                <!-- Candlestick for '0' -->
+                <div class="candlestick candle-1">
+                    <div class="flame" data-candle="1"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teks dan Tombol di depan kue -->
+        <div class="cake-controls">
+            <button id="blow-candle-button">Enable Blowing</button>
+            <p id="speech-status"></p>
+            <button id="next-from-cake" class="hidden">Next</button>
+        </div>
+    </div>
+
+
+    <!-- Envelope Slide -->
+    <div id="envelope-slide" class="slide">
+        <div class="envelope-container">
+            <!-- Updated img src for the envelope -->
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExemV1eWpkd2NvMzRiZTM1YzRjdGZjemZ5bmtobDQ5d3pjZXpiYnk5NSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKAn8Z3ofXv52fK/giphy.gif" alt="Envelope" class="envelope-img">
+            <div class="envelope-stamp"></div> <!-- Stamp will be part of the image now -->
+            <p class="envelope-question">Can you help me to open it?</p>
+            <div class="envelope-buttons">
+                <button id="yes-button" class="btn-yes">Yes</button>
+                <button id="no-button" class="btn-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rejection Slide -->
+    <div id="rejection-slide" class="slide">
+        <!-- Updated img src for the crying face -->
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3bmNsOW1kcWFqdXprcDl6YTdyYzcxaHN6bmhzMDVteHNhMWduM3JxcSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/x9OCxR2VdgaKDSeJev/giphy.gif" alt="Crying Face" class="crying-img">
+        <p class="rejection-text">HEH!? BAMBU KAU!</p>
+        <button id="try-again-button">Try Again</button>
+    </div>
+
+    <!-- Letter Slide -->
+    <div id="letter-slide" class="slide">
+        <div class="sakura-static sakura-1">🌸</div>
+        <div class="sakura-static sakura-2">🌸</div>
+        <div class="letter-card">
+            <div class="card-header">
+                <span class="flower cherry-blossom">🌸</span>
+                <span class="flower rose">🌹</span>
+                <span class="cute-animation">✨</span>
+            </div>
+            <h3>Happy Birthday!</h3>
+            <p class="birthday-message">
+                Hope your birthday brings you endless laughter, good vibes, and zero annoying people wokwok.
+                Wishing you a year full of happiness, unexpected kindness, and at least one miracle like me :b
+                - Vicky🎉🎂
+            </p>
+            <button id="close-letter-button">Close Letter</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
