@@ -1,0 +1,403 @@
+/* Palet Warna */
+:root {
+    --bone: #E5D7C4;
+    --tan: #CFBB99;
+    --moss-green: #889063;
+    --kombu-green: #354024;
+    --cafe-noir: #4C3D19;
+    --red-cherry: crimson; /* Menggunakan crimson sesuai permintaan */
+}
+
+/* Font Import (Alternatif Notera) */
+/* Jika Anda memiliki Notera, gunakan @font-face ini dan ganti URL */
+/*
+@font-face {
+    font-family: 'Notera';
+    src: url('path/to/Notera.woff2') format('woff2'),
+         url('path/to/Notera.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*/
+/* Alternatif Google Fonts */
+
+body {
+    margin: 0;
+    font-family: "Gowun Dodum", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: var(--bone); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; /* Hide overflow for confetti and animations */
+    color: var(--moss-green);
+    text-align: center;
+}
+
+/* General Slide Styling */
+.slide {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+
+.slide.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Buttons General Styling */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin: 10px;
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: "Gowun Dodum", sans-serif;
+    color: var(--bone);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Splash Slide */
+#splash-slide h1 {
+    font-family: "Tangerine", cursive;
+    font-size: 7em;
+    color: var(--kombu-green); 
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#splash-slide #start-button {
+    background-color: var(--moss-green);
+}
+
+
+/* Confetti Effect */
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 100;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    border-radius: 50%;
+    opacity: 0;
+    animation: confetti-fall 3s ease-out forwards;
+}
+
+.confetti.square { border-radius: 0; }
+.confetti.triangle { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 10px solid transparent; }
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+
+/* Cake Slide */
+#cake-slide {
+    position: relative;
+    overflow: hidden; 
+}
+
+/* Judul "Make a Wish!" di atas kue */
+#cake-slide .cake-title {
+    position: absolute;
+    top: 8%; /* Atur posisi vertikal di atas kue */
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 4.5em;
+    color: var(--kombu-green);
+    z-index: 3; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    margin: 0; 
+}
+
+.spline-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+    pointer-events: none; 
+}
+
+spline-viewer {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.2); 
+}
+
+.candles-wrapper {
+    position: absolute;
+    top: 45%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 100px; 
+    z-index: 2; /* Di atas model spline */
+    pointer-events: none; 
+}
+
+.flame {
+    width: 10px;
+    height: 15px;
+    background: radial-gradient(circle at 50% 0%, yellow, orange, red);
+    border-radius: 50% 50% 0 50%;
+    transform: rotate(-1800deg);
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    box-shadow: 0 0 8px 2px rgba(255, 165, 0, 0.7);
+    animation: flicker 0.2s infinite alternate;
+}
+
+@keyframes flicker {
+    0% { transform: rotate(-180deg) scale(1); opacity: 1; }
+    50% { transform: rotate(-179deg) scale(1.05); opacity: 0.95; }
+    100% { transform: rotate(-182deg) scale(0.98); opacity: 1; }
+}
+
+.flame.extinguished {
+    background: #ccc; 
+    box-shadow: none;
+    transform: rotate(0deg) scale(0.5);
+    opacity: 0;
+    transition: all 0.5s ease-out;
+}
+
+.cake-controls {
+    position: absolute;
+    bottom: 10%; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3; /* Pastikan di atas spline */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; 
+}
+
+#cake-slide .cake-controls p {
+    color: var(--cafe-noir);
+    font-size: 1.1em;
+    margin: 0; 
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); 
+}
+
+#cake-slide button {
+    background-color: var(--moss-green); 
+    margin-top: 20px;
+}
+
+#cake-slide #next-from-cake {
+    background-color: var(--moss-green); 
+}
+
+#speech-status {
+    color: var(--cafe-noir);
+    font-size: 1.1em;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Envelope Slide */
+#envelope-slide .envelope-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 983000px;
+    background-color: var(--kombu-green); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(97, 139, 13, 0.7);
+    max-width: 1000000px;
+}
+
+.envelope-img {
+    width: auto;
+    height: auto;
+    max-width: 600px; 
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.envelope-stamp {
+    position: absolute;
+    top: 50px; 
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3em;
+    z-index: 1;
+    color: #8B4513; 
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.envelope-question {
+    font-family: "Poiret One", sans-serif;
+    font-size: 2.5em;
+    color: var(--tan);
+    margin-top: 15px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.envelope-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.btn-yes {
+    background-color: var(--moss-green); /* Green */
+}
+
+.btn-no {
+    background-color: var(--red-cherry); /* Pink */
+}
+
+/* Rejection Slide */
+#rejection-slide .crying-img {
+    width: 400px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+#rejection-slide .rejection-text {
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 2.2em;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#rejection-slide #try-again-button {
+    background-color: var(--moss-green);
+}
+
+/* Letter Slide */
+#letter-slide {
+    background-color: var(--bone); 
+}
+
+.letter-card {
+    position: relative;
+    background-color: var(--moss-green);
+    border: 5px solid var(--kombu-green); 
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    min-height: 400px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    transition: all 0.7s ease-in-out; 
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.flower {
+    font-size: 2.5em;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.cherry-blossom { color: #FFB6C1; } 
+.rose { color: #FF69B4; } 
+.cute-animation {
+    font-size: 2em;
+    color: #FFD700; 
+    animation: sparkle 1.5s infinite alternate;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.2); opacity: 1; }
+}
+
+#letter-slide h3 {
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 2.5em;
+    color: rgba(249, 244, 218, 0.7);
+    margin-bottom: 20px;
+}
+
+.birthday-message {
+    font-family: "Poiret One", sans-serif;
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: justify;
+    padding: 0 15px;
+    margin-bottom: 30px;
+}
+
+#close-letter-button {
+    background-color: var(--kombu-green);
+    margin-top: 30px;
+}
+
+/* Static Sakura around the letter */
+.sakura-static {
+    position: absolute;
+    font-size: 3em;
+    color: #FFB6C1;
+    opacity: 0.7;
+    z-index: 0;
+}
+
+.sakura-1 { top: 10%; left: 15%; transform: rotate(20deg); }
+.sakura-2 { bottom: 10%; right: 15%; transform: rotate(-30deg); }
+.sakura-static:nth-child(3) { top: 5%; right: 25%; transform: rotate(45deg); font-size: 2em; }
+.sakura-static:nth-child(4) { bottom: 20%; left: 20%; transform: rotate(-10deg); font-size: 2.5em; }
